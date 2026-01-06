@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Registration Form</h2>
+
+<form onsubmit="return validateForm()">
+
+  Name:<br>
+  <input type="text" id="name" placeholder="Enter Name"><br><br>
+
+  Email:<br>
+  <input type="text" id="email" placeholder="Enter Email"><br><br>
+
+  Password:<br>
+  <input type="password" id="password" placeholder="Enter Password"><br><br>
+
+  Phone Number:<br>
+  <input type="text" id="phone" placeholder="Enter Phone Number"><br><br>
+
+  Date of Birth:<br>
+  <input type="date" id="dob"><br><br>
+
+  <button type="submit">Submit</button>
+
+</form>
+
+<p id="msg"></p>
+
+<script>
+function validateForm() {
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+  let pass = document.getElementById("password").value;
+  let phone = document.getElementById("phone").value;
+  let msg = document.getElementById("msg");
+
+  if (name.length < 3 || /[^a-zA-Z]/.test(name)) {
+    msg.innerText = "Name must be at least 3 letters and contain only letters";
+    return false;
+  }
+
+  if (!email.includes("@") || !email.includes(".")) {
+    msg.innerText = "Enter a valid email";
+    return false;
+  }
+
+  if (pass.length < 8 ||
+      !/[A-Z]/.test(pass) ||
+      !/[a-z]/.test(pass) ||
+      !/[0-9]/.test(pass) ||
+      !/[@$!%*?&]/.test(pass)) {
+    msg.innerText = "Password must be 8+ chars, include uppercase, lowercase, number & special char";
+    return false;
+  }
+
+  if (phone.length != 10 || /[^0-9]/.test(phone)) {
+    msg.innerText = "Phone must be 10 digits";
+    return false;
+  }
+
+  msg.innerText = "Form Submitted Successfully!";
+  return false;
+}
+</script>
+
+</body>
+</html>
